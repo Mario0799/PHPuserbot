@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+require_once 'vendor/autoload.php';
 
 echo 'Deserializing MadelineProto from session.madeline...'.PHP_EOL;
 $MadelineProto = false;
@@ -44,7 +45,7 @@ if ($MadelineProto === false) {
             $authorization = $MadelineProto->complete_signup(readline('Please enter your first name: '), readline('Please enter your last name (can be empty): '));
         }
         echo 'Serializing MadelineProto to session.madeline...'.PHP_EOL;
-        echo 'Wrote '.\danog\MadelineProto\Serialization::serialize('session.madeline', $MadelineProto).' bytes'.PHP_EOL;
+        echo 'Wrote '.\danog\MadelineProto\Serialization::serialize('session.phpuserbot', $MadelineProto).' bytes'.PHP_EOL;
     } else {
         $MadelineProto->bot_login(getenv('BOT_TOKEN'));
     }
@@ -52,7 +53,7 @@ if ($MadelineProto === false) {
 
 include("class.php");
 $bot=new PHPuserbot();
-$bot->sm("@Ignoranza2017", "Test");
+$bot->sm("@Ignoranza2017", "<b>Test</b>");
 
 
 

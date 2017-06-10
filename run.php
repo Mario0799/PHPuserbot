@@ -53,9 +53,37 @@ if ($MadelineProto === false) {
 
 include("class.php");
 $bot=new PHPuserbot();
-$bot->sm("@Ignoranza2017", "<b>Test</b>");
+$bot->sm("@Ignoranza2017", "*Test*", "Markdown");
 
 
+$offset = 0;
+while (true) {
+    $updates = $MadelineProto->API->get_updates(['offset' => $offset, 'limit' => 50, 'timeout' => 0]); 
+    foreach ($updates as $update) {
+        $offset = $update['update_id'] + 1; 
+        var_dump($update);
+        try {
+			$res = json_encode($update, JSON_PRETTY_PRINT);
+             if ($res == '') {
+				$res = var_export($update, true);
+             }
+
+                    include("var.php");
+            }
+catch(danog\MadelineProto\RPCErrorException $e) {
+	var_dump($e);
+}
+catch (\danog\MadelineProto\Exception $e)
+{
+//var_dump($e);
+}
+       
+
+    }
+    $asd='Wrote '.\danog\MadelineProto\Serialization::serialize('bot.madeline', $MadelineProto).' bytes'.PHP_EOL;
+	unset($updates);
+	unset($asd);
+}	
 
 
 
